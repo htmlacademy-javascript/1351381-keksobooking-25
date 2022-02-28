@@ -5,14 +5,10 @@ const getRandomInt = (min = 1, max = 10) => {
   return result;
 };
 
-getRandomInt();
-
 const getRandomFloat = (min = 1, max = 10, length = 1) => {
   const result = (min < 0 || max < 0) ? 'Вводите только положительные числа' : (Math.random() * (max - min) + min);
   return +result.toFixed(Math.floor(length));
 };
-
-getRandomFloat();
 
 const AVATARS_COUNT = 10;
 
