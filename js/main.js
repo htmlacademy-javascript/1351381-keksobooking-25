@@ -10,11 +10,11 @@ const getRandomFloat = (min = 1, max = 10, length = 1) => {
   return +result.toFixed(Math.floor(length));
 };
 
-const AVATARS_COUNT = 10;
+const REVIEW_COUNT = 10;
 
 const getRandomAvatar = () => {
   const indexAvatarArray = [];
-  for (let i = 1; i <= AVATARS_COUNT; i++) {
+  for (let i = 1; i <= REVIEW_COUNT; i++) {
     let indexAvatar = i;
     if (indexAvatar < 10) {
       indexAvatar = `0${indexAvatar}`;
@@ -22,15 +22,6 @@ const getRandomAvatar = () => {
     indexAvatarArray.push(`img/avatars/user${indexAvatar}.png`);
   }
   return indexAvatarArray;
-};
-
-const AUTHOR = {
-  avatar: getRandomAvatar(),
-};
-
-const LOCATION = {
-  lat: getRandomFloat(35.65000, 35.70000, 4),
-  lng: getRandomFloat(139.70000, 139.80000, 4),
 };
 
 const type = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -55,22 +46,42 @@ const getRandomArray = (array) => {
   return uniqueRandomArray;
 };
 
-const OFFER = {
-  title: 'Милая, уютная квартирка в центре',
-  address: `${LOCATION.lat}, ${LOCATION.lng}`,
-  price: getRandomInt(),
-  type: getRandomEement(type),
-  rooms: getRandomInt(),
-  guests: getRandomInt(),
-  checkin: getRandomEement(check),
-  checkout: getRandomEement(check),
-  features: getRandomArray(features),
-  description: 'Замечательно и вообще просто прекрасно.',
-  photos: getRandomArray(photos),
+const getLocation = () => {
+  const LOCATION = {
+    lat: getRandomFloat(35.65000, 35.70000, 4),
+    lng: getRandomFloat(139.70000, 139.80000, 4)
+  };
+  return LOCATION;
 };
 
+const getSimulatorArray = (count) => {
+  const objectIndex = getRandomAvatar();
+  const simulatorArray = [];
+  let i = 0;
+  while (i < count) {
+    const location = getLocation();
+    const someObject = {
+      avatar: objectIndex[i],
+      offer: {
+        title: 'Милая, уютная квартирка в центре',
+        address: `${location.lat}, ${location.lng}`,
+        price: getRandomInt(),
+        type: getRandomEement(type),
+        rooms: getRandomInt(),
+        guests: getRandomInt(),
+        checkin: getRandomEement(check),
+        checkout: getRandomEement(check),
+        features: getRandomArray(features),
+        description: 'Замечательно и вообще просто прекрасно.',
+        photos: getRandomArray(photos),
+      },
+      location: location,
+    };
+    simulatorArray.push(someObject);
+    i++;
+  }
+  return simulatorArray;
+};
 
 // eslint-disable-next-line no-console
-console.log(OFFER);
-// eslint-disable-next-line no-console
-console.log(AUTHOR);
+console.log(getSimulatorArray(REVIEW_COUNT));
