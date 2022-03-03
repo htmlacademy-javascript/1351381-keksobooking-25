@@ -61,7 +61,9 @@ const getSimulatorArray = (count) => {
   while (i < count) {
     const location = getLocation();
     const someObject = {
-      avatar: objectIndex[i],
+      author: {
+        avatar: objectIndex[i],
+      },
       offer: {
         title: 'Милая, уютная квартирка в центре',
         address: `${location.lat}, ${location.lng}`,
