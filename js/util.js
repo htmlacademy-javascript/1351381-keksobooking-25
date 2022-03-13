@@ -1,7 +1,7 @@
 const getRandomInt = (min = 1, max = 10) => {
   const lower = Math.ceil(min);
   const upper = Math.ceil(max);
-  const result = (min < 0 || max < 0) ? 'Вводите только положительные числа' : Math.floor(Math.random() * (upper - lower) + (lower));
+  const result = (min < 0 || max < 0) ? 'Вводите только положительные числа' : Math.round(Math.random() * (upper - lower) + (lower));
   return result;
 };
 

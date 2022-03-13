@@ -2,17 +2,28 @@ import {getRandomInt, getRandomFloat} from './util.js';
 
 const REVIEW_COUNT = 10;
 
-const getRandomAvatar = () => {
+function getRandomAvatarArray(min, max) {
   const indexAvatarArray = [];
-  for (let i = 1; i <= REVIEW_COUNT; i++) {
-    let indexAvatar = i;
-    if (indexAvatar < 10) {
-      indexAvatar = `0${indexAvatar}`;
+
+  return function() {
+    for (let i =0; i < max; i++) {
+      let indexAvatar = getRandomInt(min, max);
+
+      while (indexAvatarArray.includes(`img/avatars/user${indexAvatar}.png`)) {
+        indexAvatar = getRandomInt(min, max);
+      }
+
+      if (indexAvatar < 10) {
+        indexAvatar = `0${indexAvatar}`;
+      }
+
+      indexAvatarArray.push(`img/avatars/user${indexAvatar}.png`);
     }
-    indexAvatarArray.push(`img/avatars/user${indexAvatar}.png`);
-  }
-  return indexAvatarArray;
-};
+    return indexAvatarArray;
+  };
+}
+
+const getRandomAvatar = getRandomAvatarArray(1, REVIEW_COUNT);
 
 const type = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const check = ['12:00', '13:00', '14:00'];
@@ -44,9 +55,9 @@ const getLocation = () => {
   return LOCATION;
 };
 
-const getSimulatorArray = (count) => {
+const getMockData = (count) => {
   const objectIndex = getRandomAvatar();
-  const simulatorArray = [];
+  const mockArray = [];
   let i = 0;
   while (i < count) {
     const location = getLocation();
@@ -69,12 +80,12 @@ const getSimulatorArray = (count) => {
       },
       location: location,
     };
-    simulatorArray.push(someObject);
+    mockArray.push(someObject);
     i++;
   }
-  return simulatorArray;
+  return mockArray;
 };
 
-const CREATE_INFO = getSimulatorArray(REVIEW_COUNT);
+const MOCK_DATA = getMockData(REVIEW_COUNT);
 
-export {CREATE_INFO};
+export {MOCK_DATA};
