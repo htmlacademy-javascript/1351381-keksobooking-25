@@ -10,4 +10,21 @@ const getRandomFloat = (min = 1, max = 10, length = 1) => {
   return +result.toFixed(Math.floor(length));
 };
 
-export {getRandomInt, getRandomFloat};
+const getRandomElement = (array) => {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  const randomElement = array[randomIndex];
+  return randomElement;
+};
+
+const getRandomArray = (array) => {
+  const arrayLength  = getRandomInt(0, array.length);
+  const randomArray = [];
+  for (let i = 0; i < arrayLength; i++) {
+    const randomElement = getRandomElement(array);
+    randomArray.push(randomElement);
+  }
+  const uniqueRandomArray = Array.from(new Set(randomArray));
+  return uniqueRandomArray;
+};
+
+export {getRandomInt, getRandomFloat, getRandomElement, getRandomArray};
