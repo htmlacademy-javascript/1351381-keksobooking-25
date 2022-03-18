@@ -3,7 +3,6 @@ import {MOCK_DATA} from './data.js';
 const mapCanvas = document.querySelector('#map-canvas');
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-// const mockElement = MOCK_DATA[0];
 const popupFilling = (mockElement) => {
   const popupFilled = popupTemplate.cloneNode(true);
 
