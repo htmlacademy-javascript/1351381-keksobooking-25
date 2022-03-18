@@ -17,7 +17,7 @@ const roomsOptions = {
 
 const validateRooms = () => {
   const roomsValue = roomsOptions[roomsNumber.value];
-  const guestsValue = guestsNumber;
+  const guestsValue = guestsNumber.value;
   return roomsValue.includes(guestsValue);
 };
 
@@ -26,9 +26,14 @@ const getRoomsErrorMessage = () => {
   return errorMessage;
 };
 
-pristine.addValidator(roomsNumber, validateRooms, getRoomsErrorMessage);
-pristine.addValidator(guestsNumber ,validateRooms, getRoomsErrorMessage);
+guestsNumber.addEventListener('change', () => {
+  pristine.validate();
+});
 
-form.addEventListener('submit', () => {
+pristine.addValidator(roomsNumber, validateRooms, getRoomsErrorMessage);
+pristine.addValidator(guestsNumber);
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
   pristine.validate();
 });
