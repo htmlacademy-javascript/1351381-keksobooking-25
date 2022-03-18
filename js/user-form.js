@@ -37,4 +37,3 @@ form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
-// asdasd
