@@ -1,3 +1,5 @@
+import '../pristine/pristine.min.js';
+
 const form = document.querySelector('.ad-form');
 
 const pristine = new Pristine(form, {
