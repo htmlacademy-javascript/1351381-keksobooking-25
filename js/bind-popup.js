@@ -1,6 +1,3 @@
-import {MOCK_DATA} from './data.js';
-
-const mapCanvas = document.querySelector('#map-canvas');
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const popupFilling = (mockElement) => {
@@ -71,4 +68,4 @@ const popupFilling = (mockElement) => {
   return popupFilled;
 };
 
-mapCanvas.appendChild(popupFilling(MOCK_DATA[0]));
+export {popupFilling};
