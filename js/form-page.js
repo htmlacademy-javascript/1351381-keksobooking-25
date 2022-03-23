@@ -18,7 +18,7 @@ const disableForm = () => {
 disableForm();
 
 const activateForm = () => {
-  adForm.classList.remove('ad__form--disabled');
+  adForm.classList.remove('ad-form--disabled');
   mapForm.classList.remove('map__filters--disabled');
 
   const activateElem = (form) => {
