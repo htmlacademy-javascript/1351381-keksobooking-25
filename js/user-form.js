@@ -81,5 +81,17 @@ timeOut.addEventListener('change', (evt) => {
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  // const isValid = pristine.validate();
+
+  // if (isValid) {
+    const formData = new FormData(evt.target);
+
+    fetch('https://25.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+
+  // }
 });

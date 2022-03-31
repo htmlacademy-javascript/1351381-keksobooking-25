@@ -1,5 +1,4 @@
 import {activateForm} from './form-page.js';
-import {MOCK_DATA} from './data.js';
 import {popupFilling} from './bind-popup.js';
 
 const map = L.map('map-canvas')
@@ -40,7 +39,7 @@ mainMarker.addTo(map);
 const address = document.querySelector('#address');
 address.value = '35.6817, 139.7539';
 
-mainMarker.on('moveend', (evt) => {
+mainMarker.on('movegit ', (evt) => {
   const coordinates = evt.target.getLatLng();
   address.value = `${coordinates.lat.toFixed(4)}, ${coordinates.lng.toFixed(4)}`;
 });
@@ -51,19 +50,26 @@ const similarMarkerIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-MOCK_DATA.forEach((point) => {
-  const lat = point.location.lat;
-  const lng = point.location.lng;
-  const similarMarker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon: similarMarkerIcon,
-    },
-  );
-  similarMarker
-    .addTo(map)
-    .bindPopup(popupFilling(point));
-});
+const getMarkerAd = (arraySimilarAds) => {
+  arraySimilarAds.forEach((point) => {
+    const lat = point.location.lat;
+    const lng = point.location.lng;
+    const similarMarker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon: similarMarkerIcon,
+      },
+    );
+    similarMarker
+      .addTo(map)
+      .bindPopup(popupFilling(point));
+  });
+};
+
+
+export {getMarkerAd};
+
+

@@ -9,7 +9,7 @@ const popupFilling = (mockElement) => {
 
   popupFilled.querySelector('.popup__text--address').textContent = mockElement.offer.address;
 
-  popupFilled.querySelector('.popup__text--price').textContent = `${mockElement.offer.price}000 ₽/ночь`;
+  popupFilled.querySelector('.popup__text--price').textContent = `${mockElement.offer.price} ₽/ночь`;
 
   const popupType = popupFilled.querySelector('.popup__type');
   const getHousingTypeListElement = () => {
@@ -31,17 +31,18 @@ const popupFilling = (mockElement) => {
 
   const popupFeaturesContainer = popupFilled.querySelector('.popup__features');
   const popupFeaturesList = popupFeaturesContainer.querySelectorAll('.popup__feature');
-  const modifiers = mockElement.offer.features.map((feature) => `popup__feature--${feature}`);
-  if (mockElement.offer.features.length !== 0) {
+
+  if (!mockElement.offer.features) {
+    popupFeaturesContainer.remove();
+  } else {
+    const modifiers = mockElement.offer.features.map((feature) => `popup__feature--${feature}`);
+
     popupFeaturesList.forEach((popupFeaturesItem) => {
       const modifier = popupFeaturesItem.classList[1];
-
       if (!modifiers.includes(modifier)) {
         popupFeaturesItem.remove();
       }
     });
-  } else {
-    popupFeaturesContainer.remove();
   }
 
   const popupDescription = popupFilled.querySelector('.popup__description');
@@ -53,7 +54,10 @@ const popupFilling = (mockElement) => {
 
   const popupImagesHousing = popupFilled.querySelector('.popup__photos');
   const popupImageOfHouse = popupImagesHousing.querySelector('.popup__photo');
-  if (mockElement.offer.photos.length !== 0) {
+
+  if (!mockElement.offer.photos) {
+    popupImagesHousing.remove();
+  } else {
     popupImageOfHouse.remove();
     const photosList = mockElement.offer.photos;
     for (let i = 0; i < photosList.length; i++) {
@@ -61,8 +65,6 @@ const popupFilling = (mockElement) => {
       photosListItem.src = photosList[i];
       popupImagesHousing.appendChild(photosListItem);
     }
-  } else {
-    popupImagesHousing.remove();
   }
 
   return popupFilled;
