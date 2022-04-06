@@ -39,7 +39,7 @@ mainMarker.addTo(map);
 const address = document.querySelector('#address');
 address.value = '35.6817, 139.7539';
 
-mainMarker.on('movegit ', (evt) => {
+mainMarker.on('move ', (evt) => {
   const coordinates = evt.target.getLatLng();
   address.value = `${coordinates.lat.toFixed(4)}, ${coordinates.lng.toFixed(4)}`;
 });

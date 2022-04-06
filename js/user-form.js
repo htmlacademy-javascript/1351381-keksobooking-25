@@ -1,4 +1,6 @@
 import '../pristine/pristine.min.js';
+import './form-messages.js';
+import { getErrorModal, getSuccessModal } from './form-messages.js';
 
 const form = document.querySelector('.ad-form');
 
@@ -33,7 +35,7 @@ guestsNumber.addEventListener('change', () => {
 });
 
 pristine.addValidator(roomsNumber, validateRooms, getRoomsErrorMessage);
-pristine.addValidator(guestsNumber);
+pristine.addValidator(guestsNumber, validateRooms);
 
 const price = form.querySelector('#price');
 const houseType = form.querySelector('#type');
@@ -81,10 +83,11 @@ timeOut.addEventListener('change', (evt) => {
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  // const isValid = pristine.validate();
+  const isValid = pristine.validate();
 
-  // if (isValid) {
+  if (isValid) {
     const formData = new FormData(evt.target);
+    getSuccessModal();
 
     fetch('https://25.javascript.pages.academy/keksobooking',
       {
@@ -92,6 +95,7 @@ form.addEventListener('submit', (evt) => {
         body: formData,
       },
     );
-
-  // }
+  } else {
+    getErrorModal();
+  }
 });
