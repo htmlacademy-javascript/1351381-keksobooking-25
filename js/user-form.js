@@ -1,6 +1,6 @@
 import '../pristine/pristine.min.js';
 import './form-messages.js';
-import { getErrorModal, getSuccessModal } from './form-messages.js';
+import {getErrorModal, getSuccessModal} from './form-messages.js';
 
 const form = document.querySelector('.ad-form');
 
