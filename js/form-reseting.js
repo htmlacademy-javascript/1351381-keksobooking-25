@@ -2,14 +2,13 @@ import {map, removeMainMarker, getMainMarker} from './map.js';
 
 const form = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
-const resetButton = form.querySelector('.ad-form__reset');
 const price = form.querySelector('#price');
-const PRICE_DEFAULT = 1000;
 const address = form.querySelector('#address');
 const sliderPrice = document.querySelector('.ad-form__slider');
 
-resetButton.addEventListener('click', (evt) => {
-  evt.preventDefault();
+const PRICE_DEFAULT = 1000;
+
+const resettingForm = () => {
   form.reset();
   mapFilters.reset();
 
@@ -23,4 +22,6 @@ resetButton.addEventListener('click', (evt) => {
   removeMainMarker();
   getMainMarker();
   map.closePopup();
-});
+};
+
+export {resettingForm};

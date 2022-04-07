@@ -1,7 +1,6 @@
 import './user-form.js';
 import './form-page.js';
 import './price-slider.js';
-import './form-reseting.js';
 import {getMainMarker, getMarkerAd} from './map.js';
 import {getSuccessModal} from './form-messages.js';
 import {setUserFormSubmit} from './user-form.js';
