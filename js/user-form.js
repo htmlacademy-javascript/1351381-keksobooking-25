@@ -1,6 +1,7 @@
 import '../pristine/pristine.min.js';
 import './form-messages.js';
-import {getErrorModal, getSuccessModal} from './form-messages.js';
+import {getErrorModal} from './form-messages.js';
+import {sendData} from './api.js';
 
 const form = document.querySelector('.ad-form');
 
@@ -81,21 +82,21 @@ timeOut.addEventListener('change', (evt) => {
   timeIn.value = evt.target.value;
 });
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
 
-  if (isValid) {
-    const formData = new FormData(evt.target);
-    getSuccessModal();
+    if (isValid) {
+      sendData(
+        () => onSuccess(),
+        () => getErrorModal(),
+        new FormData(evt.target),
+      );
+    } else {
+      getErrorModal();
+    }
+  });
+};
 
-    fetch('https://25.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    );
-  } else {
-    getErrorModal();
-  }
-});
+export {setUserFormSubmit};

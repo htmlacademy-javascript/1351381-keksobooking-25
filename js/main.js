@@ -1,12 +1,17 @@
 import './user-form.js';
 import './form-page.js';
 import './price-slider.js';
-import {getMarkerAd} from './map.js';
+import './form-reseting.js';
+import {getMainMarker, getMarkerAd} from './map.js';
+import {getSuccessModal} from './form-messages.js';
+import {setUserFormSubmit} from './user-form.js';
+import {getData} from './api.js';
 
 const SIMILAR_AD_COUNT = 10;
 
-fetch('https://25.javascript.pages.academy/keksobooking/data')
-  .then((response) => response.json())
-  .then((similarAds) => {
-    getMarkerAd(similarAds.slice(0, SIMILAR_AD_COUNT));
-  });
+getData((similarAds) => {
+  getMarkerAd(similarAds.slice(0, SIMILAR_AD_COUNT));
+});
+
+setUserFormSubmit(getSuccessModal);
+getMainMarker();
