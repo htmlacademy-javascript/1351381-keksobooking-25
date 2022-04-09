@@ -1,4 +1,7 @@
 import '../pristine/pristine.min.js';
+import './form-messages.js';
+import {sendData} from './api.js';
+import {resetForm} from './form-reseting.js';
 
 const form = document.querySelector('.ad-form');
 
@@ -33,7 +36,7 @@ guestsNumber.addEventListener('change', () => {
 });
 
 pristine.addValidator(roomsNumber, validateRooms, getRoomsErrorMessage);
-pristine.addValidator(guestsNumber);
+pristine.addValidator(guestsNumber, validateRooms);
 
 const price = form.querySelector('#price');
 const houseType = form.querySelector('#type');
@@ -79,7 +82,25 @@ timeOut.addEventListener('change', (evt) => {
   timeIn.value = evt.target.value;
 });
 
-form.addEventListener('submit', (evt) => {
+const resetButton = form.querySelector('.ad-form__reset');
+resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  resetForm();
 });
+
+const setUserFormSubmit = (onSuccess, onFail) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      sendData(
+        onSuccess,
+        onFail,
+        new FormData(evt.target),
+      );
+    }
+  });
+};
+
+export {setUserFormSubmit};

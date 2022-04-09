@@ -1,5 +1,4 @@
 import {activateForm} from './form-page.js';
-import {MOCK_DATA} from './data.js';
 import {popupFilling} from './bind-popup.js';
 
 const map = L.map('map-canvas')
@@ -24,26 +23,34 @@ const mainMarketIcon = L.icon({
   iconAnchor: [26, 52],
 });
 
-const mainMarker = L.marker(
-  {
-    lat: 35.6817,
-    lng: 139.7539,
-  },
-  {
-    draggable: true,
-    icon: mainMarketIcon,
-  },
-);
-
-mainMarker.addTo(map);
-
 const address = document.querySelector('#address');
 address.value = '35.6817, 139.7539';
 
-mainMarker.on('moveend', (evt) => {
-  const coordinates = evt.target.getLatLng();
-  address.value = `${coordinates.lat.toFixed(4)}, ${coordinates.lng.toFixed(4)}`;
-});
+let mainMarker;
+
+const renderMainMarker = () => {
+  mainMarker = L.marker(
+    {
+      lat: 35.6817,
+      lng: 139.7539,
+    },
+    {
+      draggable: true,
+      icon: mainMarketIcon,
+    },
+  );
+
+  mainMarker.on('move ', (evt) => {
+    const coordinates = evt.target.getLatLng();
+    address.value = `${coordinates.lat.toFixed(4)}, ${coordinates.lng.toFixed(4)}`;
+  });
+
+  mainMarker.addTo(map);
+};
+
+const removeMainMarker = () => {
+  mainMarker.remove();
+};
 
 const similarMarkerIcon = L.icon({
   iconUrl: '../img/pin.svg',
@@ -51,19 +58,26 @@ const similarMarkerIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-MOCK_DATA.forEach((point) => {
-  const lat = point.location.lat;
-  const lng = point.location.lng;
-  const similarMarker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon: similarMarkerIcon,
-    },
-  );
-  similarMarker
-    .addTo(map)
-    .bindPopup(popupFilling(point));
-});
+const renderMarkers = (arraySimilarAds) => {
+  arraySimilarAds.forEach((point) => {
+    const lat = point.location.lat;
+    const lng = point.location.lng;
+    const similarMarker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon: similarMarkerIcon,
+      },
+    );
+    similarMarker
+      .addTo(map)
+      .bindPopup(popupFilling(point));
+  });
+};
+
+
+export {map, removeMainMarker, renderMainMarker, renderMarkers};
+
+
