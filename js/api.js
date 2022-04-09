@@ -1,3 +1,5 @@
+import {resetForm} from './form-reseting.js';
+
 const getData = (onSuccess) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
@@ -16,6 +18,7 @@ const sendData = (onSuccess, onFail, body) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
+        resetForm();
       } else {
         onFail();
       }

@@ -1,4 +1,4 @@
-import {map, removeMainMarker, getMainMarker} from './map.js';
+import {map, removeMainMarker, renderMainMarker} from './map.js';
 
 const form = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -8,7 +8,7 @@ const sliderPrice = document.querySelector('.ad-form__slider');
 
 const PRICE_DEFAULT = 1000;
 
-const resettingForm = () => {
+const resetForm = () => {
   form.reset();
   mapFilters.reset();
 
@@ -20,8 +20,8 @@ const resettingForm = () => {
     lng: 139.7539,
   }, 12);
   removeMainMarker();
-  getMainMarker();
+  renderMainMarker();
   map.closePopup();
 };
 
-export {resettingForm};
+export {resetForm};

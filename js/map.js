@@ -28,7 +28,7 @@ address.value = '35.6817, 139.7539';
 
 let mainMarker;
 
-const getMainMarker = () => {
+const renderMainMarker = () => {
   mainMarker = L.marker(
     {
       lat: 35.6817,
@@ -58,7 +58,7 @@ const similarMarkerIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-const getMarkerAd = (arraySimilarAds) => {
+const renderMarkers = (arraySimilarAds) => {
   arraySimilarAds.forEach((point) => {
     const lat = point.location.lat;
     const lng = point.location.lng;
@@ -78,6 +78,6 @@ const getMarkerAd = (arraySimilarAds) => {
 };
 
 
-export {map, removeMainMarker, getMainMarker, getMarkerAd};
+export {map, removeMainMarker, renderMainMarker, renderMarkers};
 
 

@@ -1,8 +1,7 @@
 import '../pristine/pristine.min.js';
 import './form-messages.js';
-import {getErrorModal} from './form-messages.js';
 import {sendData} from './api.js';
-import { resettingForm } from './form-reseting.js';
+import {resetForm} from './form-reseting.js';
 
 const form = document.querySelector('.ad-form');
 
@@ -86,23 +85,20 @@ timeOut.addEventListener('change', (evt) => {
 const resetButton = form.querySelector('.ad-form__reset');
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
-  resettingForm();
+  resetForm();
 });
 
-const setUserFormSubmit = (onSuccess) => {
+const setUserFormSubmit = (onSuccess, onFail) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
 
     if (isValid) {
       sendData(
-        () => onSuccess(),
-        () => getErrorModal(),
+        onSuccess,
+        onFail,
         new FormData(evt.target),
       );
-      resettingForm();
-    } else {
-      getErrorModal();
     }
   });
 };
