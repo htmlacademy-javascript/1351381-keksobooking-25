@@ -12,7 +12,7 @@ const resetForm = () => {
   form.reset();
   mapFilters.reset();
 
-  price.value = PRICE_DEFAULT.toFixed(2);
+  price.value = PRICE_DEFAULT;
   address.value = '35.6817, 139.7539';
   sliderPrice.noUiSlider.reset();
   map.setView({

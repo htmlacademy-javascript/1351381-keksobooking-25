@@ -7,8 +7,11 @@ noUiSlider.create(sliderPrice, {
     max: 100000,
   },
   start: 1000,
-  step: 100,
+  step: 1,
   connect: 'lower',
+  format: window.wNumb({
+    decimals: 0,
+  }),
 });
 
 sliderPrice.noUiSlider.on('update', () => {

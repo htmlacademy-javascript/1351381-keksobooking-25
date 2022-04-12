@@ -1,5 +1,10 @@
 import {activateForm} from './form-page.js';
 import {popupFilling} from './bind-popup.js';
+import {compareAds} from './form-filters.js';
+import {debounce} from './util.js';
+const filters = document.querySelector('.map__filters');
+const SIMILAR_AD_COUNT = 10;
+const RERENDER_DELAY = 500;
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -59,22 +64,33 @@ const similarMarkerIcon = L.icon({
 });
 
 const renderMarkers = (arraySimilarAds) => {
-  arraySimilarAds.forEach((point) => {
-    const lat = point.location.lat;
-    const lng = point.location.lng;
-    const similarMarker = L.marker(
-      {
-        lat,
-        lng,
-      },
-      {
-        icon: similarMarkerIcon,
-      },
-    );
-    similarMarker
-      .addTo(map)
-      .bindPopup(popupFilling(point));
-  });
+  const markerGroup = L.layerGroup().addTo(map);
+  arraySimilarAds
+    .slice()
+    .filter((elem) => compareAds(elem))
+    .slice(0, SIMILAR_AD_COUNT)
+    .forEach((point) => {
+      const lat = point.location.lat;
+      const lng = point.location.lng;
+      const similarMarker = L.marker(
+        {
+          lat,
+          lng,
+        },
+        {
+          icon: similarMarkerIcon,
+        },
+      );
+      similarMarker
+        .addTo(markerGroup)
+        .bindPopup(popupFilling(point));
+    });
+  filters.addEventListener('change', debounce(
+    () => {
+      markerGroup.clearLayers();
+    },
+    RERENDER_DELAY,
+  ));
 };
 
 

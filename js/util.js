@@ -27,4 +27,12 @@ const getRandomArray = (array) => {
   return uniqueRandomArray;
 };
 
-export {getRandomInt, getRandomFloat, getRandomElement, getRandomArray};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomInt, getRandomFloat, getRandomElement, getRandomArray, debounce};
