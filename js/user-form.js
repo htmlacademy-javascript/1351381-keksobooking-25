@@ -88,7 +88,7 @@ resetButton.addEventListener('click', (evt) => {
   resetForm();
 });
 
-const setUserFormSubmit = (onSuccess, onFail) => {
+const onUserFormSubmit = (onSuccess, onFail) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -103,4 +103,4 @@ const setUserFormSubmit = (onSuccess, onFail) => {
   });
 };
 
-export {setUserFormSubmit};
+export {onUserFormSubmit};

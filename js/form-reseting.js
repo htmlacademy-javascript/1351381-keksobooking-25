@@ -1,12 +1,12 @@
 import {map, removeMainMarker, renderMainMarker} from './map.js';
 
+const PRICE_DEFAULT = 1000;
+
 const form = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const price = form.querySelector('#price');
 const address = form.querySelector('#address');
 const sliderPrice = document.querySelector('.ad-form__slider');
-
-const PRICE_DEFAULT = 1000;
 
 const resetForm = () => {
   form.reset();

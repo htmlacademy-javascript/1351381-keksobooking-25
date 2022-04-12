@@ -2,9 +2,11 @@ import {activateForm} from './form-page.js';
 import {popupFilling} from './bind-popup.js';
 import {compareAds} from './form-filters.js';
 import {debounce} from './util.js';
-const filters = document.querySelector('.map__filters');
+
 const SIMILAR_AD_COUNT = 10;
 const RERENDER_DELAY = 500;
+
+const filters = document.querySelector('.map__filters');
 
 const map = L.map('map-canvas')
   .on('load', () => {
