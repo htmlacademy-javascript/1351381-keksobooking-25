@@ -1,6 +1,6 @@
 const filters = document.querySelector('.map__filters');
 
-const setFiltersChange = (cb) => {
+const onFiltersChange = (cb) => {
   filters.addEventListener('change', () => {
     cb();
   });
@@ -21,6 +21,7 @@ const compareAds = (elem) => {
       return false;
     }
   };
+
   const checkPrice = () => {
     if (filterPrice.value === 'any') {
       return true;
@@ -34,6 +35,7 @@ const compareAds = (elem) => {
       return false;
     }
   };
+
   const checkRooms = () => {
     if (filterRooms.value === 'any') {
       return true;
@@ -43,6 +45,7 @@ const compareAds = (elem) => {
       return false;
     }
   };
+
   const checkGuests = () => {
     if (filterGuests.value === 'any') {
       return true;
@@ -70,4 +73,4 @@ const compareAds = (elem) => {
   return checkType() && checkPrice() && checkRooms() && checkGuests() && checkFeatures();
 };
 
-export {setFiltersChange, compareAds};
+export {onFiltersChange, compareAds};
