@@ -432,12 +432,6 @@ fieldset {
   display: none;
 }
 
-.ad-form__error-text {
-  color: #cc0000;
-  margin-top: 5px;
-  margin-left: 10px;
-}
-
 .features legend {
   padding-bottom: 5px;
 }
@@ -607,17 +601,11 @@ fieldset {
   margin-right: 10px;
   margin-bottom: 10px;
 
-  min-width: 70px;
-  min-height: 70px;
-  max-width: 310px;
+  width: 70px;
+  height: 70px;
 
   background-color: #e4e4de;
   border-radius: 5px;
-
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 10px;
 }
 
 .ad-form__element--submit {
