@@ -2,22 +2,22 @@ const successMessage = document.querySelector('#success').content.querySelector(
 const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
 const errorCloseButton = errorMessage.querySelector('.error__button');
 
-function onSuccessMessageClick (message) {
-  message.remove();
-  document.closeSuccessMessagePopup();
+function onSuccessMessageClick () {
+  successMessage.remove();
+  document.removeEventListener('keydown', onSuccessMessageEscKeydown);
 }
 
-const onSuccessMessageEscKeydown = (evt) => {
+function onSuccessMessageEscKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     closeSuccessMessagePopup();
   }
-};
+}
 
 function openSuccessMessagePopup () {
   document.body.appendChild(successMessage);
 
-  successMessage.addEventListener('click', () => onSuccessMessageClick(successMessage));
+  successMessage.addEventListener('click', onSuccessMessageClick);
 
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
 }
