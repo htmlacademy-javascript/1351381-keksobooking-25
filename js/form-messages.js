@@ -1,41 +1,57 @@
-const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
+const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
+const errorCloseButton = errorMessage.querySelector('.error__button');
 
-const getSuccessModal = () => {
-  const successMessage = successMessageTemplate.cloneNode(true);
+function onSuccessMessageEscKeydown (evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeSuccessMessagePopup();
+  }
+}
 
+function openSuccessMessagePopup () {
   document.body.appendChild(successMessage);
 
-  addEventListener('click', () => {
-    successMessage.remove();
-  });
+  successMessage.addEventListener('click', closeSuccessMessagePopup);
+  document.addEventListener('keydown', onSuccessMessageEscKeydown);
+}
 
-  addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      successMessage.remove();
-    }
-  });
+function closeSuccessMessagePopup () {
+  successMessage.remove();
+
+  document.removeEventListener('keydown', onSuccessMessageEscKeydown);
+}
+
+const getSuccessModal = () => {
+  openSuccessMessagePopup();
 };
 
-const getErrorModal = () => {
-  const errorMessage = errorMessageTemplate.cloneNode(true);
-  const errorCloseButton = errorMessage.querySelector('.error__button');
+function closeErrorMessagePopup () {
+  errorMessage.remove();
+  document.removeEventListener('keydown', onErrorMessageEscKeydown);
+}
 
+function onErrorMessageEscKeydown (evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeErrorMessagePopup();
+  }
+}
+
+function openErrorMessagePopup () {
   document.body.appendChild(errorMessage);
 
-  addEventListener('click', () => {
-    errorMessage.remove();
-  });
+  errorMessage.addEventListener('click', closeErrorMessagePopup);
 
-  addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      errorMessage.remove();
-    }
-  });
+  document.addEventListener('keydown', onErrorMessageEscKeydown);
 
   errorCloseButton.addEventListener('click', () => {
     errorMessage.remove();
   });
+}
+
+const getErrorModal = () => {
+  openErrorMessagePopup();
 };
 
 export {getSuccessModal, getErrorModal};
