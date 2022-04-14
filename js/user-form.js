@@ -88,16 +88,34 @@ resetButton.addEventListener('click', (evt) => {
   resetForm();
 });
 
+const submitButton = form.querySelector('.ad-form__submit');
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикация...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 const onUserFormSubmit = (onSuccess, onFail) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
 
     if (isValid) {
-      sendData(
-        onSuccess,
-        onFail,
-        new FormData(evt.target),
+      blockSubmitButton();
+      sendData(() =>{
+        onSuccess();
+        unblockSubmitButton();
+      },
+      () => {
+        onFail();
+        unblockSubmitButton();
+      },
+      new FormData(evt.target),
       );
     }
   });

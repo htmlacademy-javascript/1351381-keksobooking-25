@@ -2,11 +2,6 @@ const successMessage = document.querySelector('#success').content.querySelector(
 const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
 const errorCloseButton = errorMessage.querySelector('.error__button');
 
-function onSuccessMessageClick () {
-  successMessage.remove();
-  document.removeEventListener('keydown', onSuccessMessageEscKeydown);
-}
-
 function onSuccessMessageEscKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -17,8 +12,7 @@ function onSuccessMessageEscKeydown (evt) {
 function openSuccessMessagePopup () {
   document.body.appendChild(successMessage);
 
-  successMessage.addEventListener('click', onSuccessMessageClick);
-
+  successMessage.addEventListener('click', closeSuccessMessagePopup);
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
 }
 
@@ -30,12 +24,9 @@ function closeSuccessMessagePopup () {
 
 const getSuccessModal = () => {
   openSuccessMessagePopup();
-
-  successMessage.addEventListener('click', closeSuccessMessagePopup);
-  document.addEventListener('keydown', closeSuccessMessagePopup);
 };
 
-function onErrorMessageClick () {
+function closeErrorMessagePopup () {
   errorMessage.remove();
   document.removeEventListener('keydown', onErrorMessageEscKeydown);
 }
@@ -50,7 +41,7 @@ function onErrorMessageEscKeydown (evt) {
 function openErrorMessagePopup () {
   document.body.appendChild(errorMessage);
 
-  errorMessage.addEventListener('click', onErrorMessageClick);
+  errorMessage.addEventListener('click', closeErrorMessagePopup);
 
   document.addEventListener('keydown', onErrorMessageEscKeydown);
 
@@ -59,17 +50,8 @@ function openErrorMessagePopup () {
   });
 }
 
-function closeErrorMessagePopup () {
-  errorMessage.remove();
-
-  document.removeEventListener('keydown', onErrorMessageEscKeydown);
-}
-
 const getErrorModal = () => {
   openErrorMessagePopup();
-
-  errorMessage.addEventListener('click', onErrorMessageClick);
-  document.addEventListener('keydown', closeErrorMessagePopup);
 };
 
 export {getSuccessModal, getErrorModal};
