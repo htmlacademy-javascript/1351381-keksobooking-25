@@ -1,5 +1,5 @@
 import {activateForm} from './form-page.js';
-import {popupFilling} from './bind-popup.js';
+import {fillPopup} from './bind-popup.js';
 import {compareAds} from './form-filters.js';
 import {debounce} from './util.js';
 
@@ -85,7 +85,7 @@ const renderMarkers = (arraySimilarAds) => {
       );
       similarMarker
         .addTo(markerGroup)
-        .bindPopup(popupFilling(point));
+        .bindPopup(fillPopup(point));
     });
   filters.addEventListener('change', debounce(
     () => {

@@ -1,6 +1,6 @@
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-const popupFilling = (mockElement) => {
+const fillPopup = (mockElement) => {
   const popupFilled = popupTemplate.cloneNode(true);
 
   popupFilled.querySelector('.popup__avatar').src = mockElement.author.avatar;
@@ -70,4 +70,4 @@ const popupFilling = (mockElement) => {
   return popupFilled;
 };
 
-export {popupFilling};
+export {fillPopup};
