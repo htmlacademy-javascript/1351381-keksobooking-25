@@ -4,7 +4,7 @@ import './price-slider.js';
 import './load-photos.js';
 import {onFiltersChange} from './form-filters.js';
 import {renderMainMarker, renderMarkers} from './map.js';
-import {getErrorModal, getSuccessModal} from './form-messages.js';
+import {openSuccessMessagePopup, openErrorMessagePopup} from './form-messages.js';
 import {onUserFormSubmit} from './user-form.js';
 import {getData} from './api.js';
 import {debounce} from './util.js';
@@ -19,5 +19,5 @@ getData((similarAds) => {
   ));
 });
 
-onUserFormSubmit(getSuccessModal, getErrorModal);
+onUserFormSubmit(openSuccessMessagePopup, openErrorMessagePopup);
 renderMainMarker();

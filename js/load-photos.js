@@ -28,3 +28,5 @@ imagesChooser.addEventListener('change', () => {
   }
 });
 
+export {avatarPreview, imagesPreview};
+
