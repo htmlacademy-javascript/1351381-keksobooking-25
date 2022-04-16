@@ -1,4 +1,5 @@
 import {map, removeMainMarker, renderMainMarker} from './map.js';
+import {avatarPreview} from './load-photos.js';
 
 const PRICE_DEFAULT = 1000;
 
@@ -7,6 +8,7 @@ const mapFilters = document.querySelector('.map__filters');
 const price = form.querySelector('#price');
 const address = form.querySelector('#address');
 const sliderPrice = document.querySelector('.ad-form__slider');
+const imagesPreview = document.querySelector('.ad-form__photo');
 
 const resetForm = () => {
   form.reset();
@@ -22,6 +24,8 @@ const resetForm = () => {
   removeMainMarker();
   renderMainMarker();
   map.closePopup();
+  avatarPreview.src = 'img/muffin-grey.svg';
+  imagesPreview.innerHTML = '';
 };
 
 export {resetForm};
