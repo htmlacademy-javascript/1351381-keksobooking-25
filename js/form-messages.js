@@ -2,19 +2,12 @@ const successMessage = document.querySelector('#success').content.querySelector(
 const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
 const errorCloseButton = errorMessage.querySelector('.error__button');
 
-function onSuccessMessageEscKeydown (evt) {
+const onSuccessMessageEscKeydown = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     closeSuccessMessagePopup();
   }
-}
-
-function openSuccessMessagePopup () {
-  document.body.appendChild(successMessage);
-
-  successMessage.addEventListener('click', closeSuccessMessagePopup);
-  document.addEventListener('keydown', onSuccessMessageEscKeydown);
-}
+};
 
 function closeSuccessMessagePopup () {
   successMessage.remove();
@@ -22,8 +15,18 @@ function closeSuccessMessagePopup () {
   document.removeEventListener('keydown', onSuccessMessageEscKeydown);
 }
 
-const getSuccessModal = () => {
-  openSuccessMessagePopup();
+const openSuccessMessagePopup = () => {
+  document.body.appendChild(successMessage);
+
+  successMessage.addEventListener('click', closeSuccessMessagePopup);
+  document.addEventListener('keydown', onSuccessMessageEscKeydown);
+};
+
+const onErrorMessageEscKeydown = (evt) => {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeErrorMessagePopup();
+  }
 };
 
 function closeErrorMessagePopup () {
@@ -31,14 +34,7 @@ function closeErrorMessagePopup () {
   document.removeEventListener('keydown', onErrorMessageEscKeydown);
 }
 
-function onErrorMessageEscKeydown (evt) {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    closeErrorMessagePopup();
-  }
-}
-
-function openErrorMessagePopup () {
+const openErrorMessagePopup = () => {
   document.body.appendChild(errorMessage);
 
   errorMessage.addEventListener('click', closeErrorMessagePopup);
@@ -48,10 +44,6 @@ function openErrorMessagePopup () {
   errorCloseButton.addEventListener('click', () => {
     errorMessage.remove();
   });
-}
-
-const getErrorModal = () => {
-  openErrorMessagePopup();
 };
 
-export {getSuccessModal, getErrorModal};
+export {openSuccessMessagePopup, openErrorMessagePopup};

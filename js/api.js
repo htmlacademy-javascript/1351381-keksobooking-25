@@ -1,5 +1,5 @@
 import {resetForm} from './form-reseting.js';
-import { showAlert } from './util.js';
+import {showAlert} from './util.js';
 
 const getData = (onSuccess) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
@@ -11,7 +11,7 @@ const getData = (onSuccess) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch('https://25.javascript.pages.academy/404',
+  fetch('https://25.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
       body,
