@@ -5,12 +5,6 @@ import {resetForm} from './form-reseting.js';
 
 const form = document.querySelector('.ad-form');
 
-const pristine = new Pristine(form, {
-  classTo: 'ad-form__element',
-  errorTextParent: 'ad-form__element',
-  errorTextClass: 'ad-form__error-text',
-});
-
 const roomsNumber = form.querySelector('#room_number');
 const guestsNumber = form.querySelector('#capacity');
 const roomsOptions = {
@@ -19,24 +13,6 @@ const roomsOptions = {
   '3': ['3','2','1'],
   '100':['0'],
 };
-
-const validateRooms = () => {
-  const roomsValue = roomsOptions[roomsNumber.value];
-  const guestsValue = guestsNumber.value;
-  return roomsValue.includes(guestsValue);
-};
-
-const getRoomsErrorMessage = () => {
-  const errorMessage ='Данные заполнены неверно';
-  return errorMessage;
-};
-
-guestsNumber.addEventListener('change', () => {
-  pristine.validate();
-});
-
-pristine.addValidator(roomsNumber, validateRooms, getRoomsErrorMessage);
-pristine.addValidator(guestsNumber, validateRooms);
 
 const price = form.querySelector('#price');
 const houseType = form.querySelector('#type');
@@ -47,6 +23,47 @@ const houseOptions = {
   'house': '5000',
   'palace': '10000',
 };
+
+const timeIn = form.querySelector('#timein');
+const timeOut = form.querySelector('#timeout');
+
+const resetButton = form.querySelector('.ad-form__reset');
+
+const submitButton = form.querySelector('.ad-form__submit');
+
+const pristine = new Pristine(form, {
+  classTo: 'ad-form__element',
+  errorTextParent: 'ad-form__element',
+  errorTextClass: 'ad-form__error-text',
+});
+
+const validateRooms = () => {
+  const roomsValue = roomsOptions[roomsNumber.value];
+  const guestsValue = guestsNumber.value;
+  return roomsValue.includes(guestsValue);
+};
+
+const getRoomsErrorMessage = () => {
+  const roomsValue = parseInt(roomsNumber.value, 10);
+  const guestsValue = parseInt(guestsNumber.value, 10);
+  let errorMessage = '';
+
+  if (roomsValue !== 100 && guestsValue === 0) {
+    errorMessage = 'Недостаточно гостей';
+  } else if (roomsValue < guestsValue) {
+    errorMessage ='Гостей очень много';
+  } else if (roomsValue === 100 && guestsValue !== 0) {
+    errorMessage = 'Данный вариант не для гостей';
+  }
+  return errorMessage;
+};
+
+guestsNumber.addEventListener('change', () => {
+  pristine.validate();
+});
+
+pristine.addValidator(roomsNumber, validateRooms, getRoomsErrorMessage);
+pristine.addValidator(guestsNumber, validateRooms);
 
 const validateHouse = () => {
   for (const type in houseOptions) {
@@ -70,25 +87,18 @@ const getHouseErrorMessage = () => {
 pristine.addValidator(price, validateHouse);
 pristine.addValidator(houseType, validateHouse, getHouseErrorMessage);
 
-const timeIn = form.querySelector('#timein');
-const timeOut = form.querySelector('#timeout');
-
 timeIn.addEventListener('change', (evt) => {
   timeOut.value = evt.target.value;
 });
-
 
 timeOut.addEventListener('change', (evt) => {
   timeIn.value = evt.target.value;
 });
 
-const resetButton = form.querySelector('.ad-form__reset');
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   resetForm();
 });
-
-const submitButton = form.querySelector('.ad-form__submit');
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
