@@ -1,12 +1,17 @@
 const sliderPrice = document.querySelector('.ad-form__slider');
 const inputPrice = document.querySelector('#price');
+const typeHouse = document.querySelector('#type');
+
+const MIN_PRICE = 0;
+const MAX_PRICE = 100000;
+const START_PRICE = 1000;
 
 noUiSlider.create(sliderPrice, {
   range: {
-    min: 0,
-    max: 100000,
+    min: MIN_PRICE,
+    max: MAX_PRICE,
   },
-  start: 1000,
+  start: START_PRICE,
   step: 1,
   connect: 'lower',
   format: window.wNumb({
@@ -20,4 +25,8 @@ sliderPrice.noUiSlider.on('update', () => {
 
 inputPrice.addEventListener('change', () => {
   sliderPrice.noUiSlider.set(inputPrice.value);
+});
+
+typeHouse.addEventListener('change', () => {
+  inputPrice.value = inputPrice.placeholder;
 });

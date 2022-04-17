@@ -5,6 +5,8 @@ import {debounce} from './util.js';
 
 const SIMILAR_AD_COUNT = 10;
 const RERENDER_DELAY = 500;
+const MAIN_POSITION_LAT = 35.6817;
+const MAIN_POSITION_LNG = 139.7539;
 
 const filters = document.querySelector('.map__filters');
 
@@ -13,8 +15,8 @@ const map = L.map('map-canvas')
     activateForm();
   })
   .setView({
-    lat: 35.6817,
-    lng: 139.7539,
+    lat: MAIN_POSITION_LAT,
+    lng: MAIN_POSITION_LNG,
   }, 12);
 
 L.tileLayer(
@@ -31,15 +33,15 @@ const mainMarketIcon = L.icon({
 });
 
 const address = document.querySelector('#address');
-address.value = '35.6817, 139.7539';
+address.value = `${MAIN_POSITION_LAT}, ${MAIN_POSITION_LNG}`;
 
 let mainMarker;
 
 const renderMainMarker = () => {
   mainMarker = L.marker(
     {
-      lat: 35.6817,
-      lng: 139.7539,
+      lat: MAIN_POSITION_LAT,
+      lng: MAIN_POSITION_LNG,
     },
     {
       draggable: true,

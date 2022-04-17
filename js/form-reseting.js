@@ -9,6 +9,8 @@ const price = form.querySelector('#price');
 const address = form.querySelector('#address');
 const sliderPrice = document.querySelector('.ad-form__slider');
 const imagesPreview = document.querySelector('.ad-form__photo');
+const MAIN_POSITION_LAT = 35.6817;
+const MAIN_POSITION_LNG = 139.7539;
 
 const resetForm = () => {
   form.reset();
@@ -18,8 +20,8 @@ const resetForm = () => {
   address.value = '35.6817, 139.7539';
   sliderPrice.noUiSlider.reset();
   map.setView({
-    lat: 35.6817,
-    lng: 139.7539,
+    lat: MAIN_POSITION_LAT,
+    lng: MAIN_POSITION_LNG,
   }, 12);
   removeMainMarker();
   renderMainMarker();
