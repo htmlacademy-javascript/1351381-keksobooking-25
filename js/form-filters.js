@@ -12,57 +12,20 @@ const onFiltersChange = (cb) => {
 };
 
 const compareAds = (elem) => {
-  const checkType = () => {
-    if (filterType.value === 'any') {
-      return true;
-    } else if (elem.offer.type === filterType.value) {
-      return true;
-    }
-    return false;
-  };
+  const checkType = () => filterType.value === 'any' || elem.offer.type === filterType.value;
 
-  const checkPrice = () => {
-    if (filterPrice.value === 'any') {
-      return true;
-    } else if (filterPrice.value === 'low' && elem.offer.price < 10000) {
-      return true;
-    } else if (filterPrice.value === 'high' && elem.offer.price > 50000) {
-      return true;
-    } else if (filterPrice.value === 'middle' && elem.offer.price >= 10000 && elem.offer.price <= 50000) {
-      return true;
-    }
-    return false;
-  };
+  const checkPrice = () => filterPrice.value === 'any' || filterPrice.value === 'low' && elem.offer.price < 10000 || filterPrice.value === 'high' && elem.offer.price > 50000 || filterPrice.value === 'middle' && elem.offer.price >= 10000 && elem.offer.price <= 50000;
 
-  const checkRooms = () => {
-    if (filterRooms.value === 'any') {
-      return true;
-    } else if (elem.offer.rooms === Number(filterRooms.value)) {
-      return true;
-    }
-    return false;
-  };
+  const checkRooms = () => filterRooms.value === 'any' || elem.offer.rooms === Number(filterRooms.value);
 
-  const checkGuests = () => {
-    if (filterGuests.value === 'any') {
-      return true;
-    } else if (elem.offer.guests === Number(filterGuests.value)) {
-      return true;
-    }
-    return false;
-  };
+  const checkGuests = () => filterGuests.value === 'any' || elem.offer.guests === Number(filterGuests.value);
 
   const checkFeatures = () => {
     const filterFeatures = [...filters.querySelectorAll('.map__checkbox:checked')];
 
     const arrFeatures = filterFeatures.map((item) => item.value);
 
-    if (!arrFeatures.length) {
-      return true;
-    } else if (elem.offer.features) {
-      return arrFeatures.every((feature) => elem.offer.features.includes(feature));
-    }
-    return false;
+    return !arrFeatures.length || (elem.offer.features && arrFeatures.every((feature) => elem.offer.features.includes(feature)));
   };
 
   return checkType() && checkPrice() && checkRooms() && checkGuests() && checkFeatures();

@@ -1,6 +1,5 @@
 const sliderPrice = document.querySelector('.ad-form__slider');
 const inputPrice = document.querySelector('#price');
-const typeHouse = document.querySelector('#type');
 
 const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
@@ -25,8 +24,4 @@ sliderPrice.noUiSlider.on('update', () => {
 
 inputPrice.addEventListener('change', () => {
   sliderPrice.noUiSlider.set(inputPrice.value);
-});
-
-typeHouse.addEventListener('change', () => {
-  inputPrice.value = inputPrice.placeholder;
 });
